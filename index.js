@@ -1,7 +1,7 @@
 'use strict'
 
 var mongoose = require('mongoose');
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 6000;
 var app = require('./app');
 
 // Conexión al servidor de Mongo.
