@@ -102,7 +102,28 @@ function loginCollaborator(req, res) {
     });
 }
 
+function getCollaborators(req, res) {
+    Collaborator.find({}).exec((err, collaborators) => {
+        if (err) {
+            res.status(500).send({
+                message: constants.ERROR_IN_REQUEST
+            });
+        } else {
+            if (!collaborators) {
+                res.status(404).send({
+                    message: constants.EMPTY_COLLABORATORS
+                });
+            } else {
+                res.status(200).send({
+                    collaborators
+                });
+            }
+        }
+    });
+}
+
 module.exports = {
     registerCollaborator,
-    loginCollaborator
+    loginCollaborator,
+    getCollaborators
 }

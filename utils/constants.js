@@ -2,7 +2,7 @@
 
 exports.constants = {
     ERROR_IN_REQUEST: 'Error en el servidor',
-    EMPTY_ANIMALS: 'No hay animales',
+    EMPTY_COLLABORATORS: 'No hay colaboradores',
     ANIMAL_NOT_EXISTS: 'Animal no existe',
     ANIMAL_NOT_SAVED: 'No se ha guardado el animal',
     ANIMAL_NAME_IS_REQUIRED: 'El nombre del animal es obligatorio',
