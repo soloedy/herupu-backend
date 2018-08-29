@@ -11,5 +11,6 @@ var api = express.Router();
 api.post('/register-collaborator', CollaboratorController.registerCollaborator);
 api.post('/login-collaborator', CollaboratorController.loginCollaborator);
 api.get('/collaborators-homepage', md_auth.ensureAuth, CollaboratorController.getCollaborators);
+api.get('/collaborator-profile/:id', md_auth.ensureAuth, CollaboratorController.getCollaborator);
 
 module.exports = api;

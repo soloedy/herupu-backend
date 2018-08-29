@@ -122,8 +122,31 @@ function getCollaborators(req, res) {
     });
 }
 
+function getCollaborator(req, res) {
+    var collaboratorId = req.params.id;
+
+    Collaborator.findById(collaboratorId).exec((err, collaborator) => {
+        if (err) {
+            res.status(500).send({
+                message: constants.ERROR_IN_REQUEST
+            });
+        } else {
+            if (!collaborator) {
+                res.status(404).send({
+                    message: constants.COLLABORATOR_NOT_EXISTS
+                });
+            } else {
+                res.status(200).send({
+                    collaborator
+                });
+            }
+        }
+    });
+}
+
 module.exports = {
     registerCollaborator,
     loginCollaborator,
-    getCollaborators
+    getCollaborators,
+    getCollaborator
 }
