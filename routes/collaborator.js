@@ -7,7 +7,7 @@ var md_admin = require('../middlewares/is_admin');
 
 var api = express.Router();
 
-api.post('/register-collaborator', CollaboratorController.register);
-api.post('/login-collaborator', CollaboratorController.login);
+api.post('/register-collaborator', CollaboratorController.registerCollaborator);
+api.post('/login-collaborator', CollaboratorController.loginCollaborator);
 
 module.exports = api;

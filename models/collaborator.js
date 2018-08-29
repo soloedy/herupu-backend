@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var UserSchema = Schema({
+var CollaboratorSchema = Schema({
     name: String,
     lastname: String,
     email: String,
@@ -15,4 +15,4 @@ var UserSchema = Schema({
     role: String
 });
 
-module.exports = mongoose.model('Collaborator', UserSchema);
+module.exports = mongoose.model('Collaborator', CollaboratorSchema);

@@ -6,7 +6,7 @@ var constants = require('../utils/constants').constants;
 var Collaborator = require('../models/collaborator');
 var jwt = require('../services/jwt');
 
-function register(req, res) {
+function registerCollaborator(req, res) {
     var collaborator = new Collaborator();
     var params = req.body;
 
@@ -63,13 +63,13 @@ function register(req, res) {
         });
     }
 }
-function login(req, res) {
+function loginCollaborator(req, res) {
     var params = req.body;
 
     var email = params.email;
     var password = params.password;
 
-    Colaborator.findOne({email: email.toLowerCase()}, (err, issetCollaborator) => {
+    Collaborator.findOne({email: email.toLowerCase()}, (err, issetCollaborator) => {
         if (err) {
             res.status(500).send({
                 message: constants.ERROR_IN_REQUEST
@@ -103,6 +103,6 @@ function login(req, res) {
 }
 
 module.exports = {
-    register,
-    login
+    registerCollaborator,
+    loginCollaborator
 }
