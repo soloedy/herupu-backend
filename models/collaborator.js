@@ -15,4 +15,4 @@ var UserSchema = Schema({
     role: String
 });
 
-module.exports = mongoose.model('User-Collaborator', UserSchema);
+module.exports = mongoose.model('Collaborator', UserSchema);

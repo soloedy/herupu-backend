@@ -3,48 +3,48 @@
 // modulos
 var bcrypt = require('bcrypt-nodejs');
 var constants = require('../utils/constants').constants;
-var User = require('../models/user-collaborator');
+var Collaborator = require('../models/collaborator');
 var jwt = require('../services/jwt');
 
 function register(req, res) {
-    var user = new User();
+    var collaborator = new Collaborator();
     var params = req.body;
 
     if (params.name && params.lastname && params.email && params.password && params.phone && params.ocupation && params.experience) {
 
-        user.name = params.name;
-        user.lastname = params.lastname;
-        user.email = params.email;
-        user.phone = params.phone;
-        user.role = 'ROLE_COLLABORATOR';
-        user.ocupation = params.ocupation;
-        user.experience = params.experience;
-        user.image = null;
+        collaborator.name = params.name;
+        collaborator.lastname = params.lastname;
+        collaborator.email = params.email;
+        collaborator.phone = params.phone;
+        collaborator.role = 'ROLE_COLLABORATOR';
+        collaborator.ocupation = params.ocupation;
+        collaborator.experience = params.experience;
+        collaborator.image = null;
 
-        User.findOne({email: user.email.toLowerCase()}, (err, issetUser) => {
+        Collaborator.findOne({email: collaborator.email.toLowerCase()}, (err, issetCollaborator) => {
             if (err) {
                 res.status(500).send({
                     message: constants.ERROR_IN_REQUEST
                 });
             } else {
-                if (!issetUser) {
+                if (!issetCollaborator) {
                     bcrypt.hash(params.password, null, null, (err, hash) => {
-                        user.password = hash;
+                        collaborator.password = hash;
 
-                        user.save((err, userStored) => {
+                        collaborator.save((err, collaboratorStored) => {
                             if (err) {
                                 res.status(500).send({
                                     message: constants.ERROR_IN_SAVE_USER
                                 });
                             } else {
-                                if (!userStored) {
+                                if (!collaboratorStored) {
                                     res.status(404).send({
                                         message: constants.USER_NOT_REGISTER
                                     });
                                 } else {
                                     res.status(200).send({
                                         message: constants.USER_SUCCESS_STORED,
-                                        user: userStored
+                                        collaborator: collaboratorStored
                                     });
                                 }
                             }
@@ -69,22 +69,22 @@ function login(req, res) {
     var email = params.email;
     var password = params.password;
 
-    User.findOne({email: email.toLowerCase()}, (err, issetUser) => {
+    Colaborator.findOne({email: email.toLowerCase()}, (err, issetCollaborator) => {
         if (err) {
             res.status(500).send({
                 message: constants.ERROR_IN_REQUEST
             });
         } else {
-            if (issetUser) {
-                bcrypt.compare(password, issetUser.password, (err, check) => {
+            if (issetCollaborator) {
+                bcrypt.compare(password, issetCollaborator.password, (err, check) => {
                     if (check) {
                         if (params.gettoken) {
                             res.status(200).send({
-                                token: jwt.createToken(issetUser)
+                                token: jwt.createToken(issetCollaborator)
                             });
                         } else {
                             res.status(200).send({
-                                issetUser
+                                issetCollaborator
                             });
                         }
                     } else {

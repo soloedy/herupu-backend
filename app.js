@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var app = express(); //se debe desempaquetar el express para poder declarar el app.
 
 var userRoutes = require('./routes/user');
-var userCollaboratorRoutes = require('./routes/user-collaborator');
+var CollaboratorRoutes = require('./routes/collaborator');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', userRoutes);
-app.use('/api', userCollaboratorRoutes);
+app.use('/api', CollaboratorRoutes);
 
 app.get ('/test', (req, res) => {
     res.status(200).send({
